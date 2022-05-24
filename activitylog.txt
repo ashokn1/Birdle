@@ -34,4 +34,5 @@ Out of class (1 hr) - finishing up the code so that it runs perfectly from the c
 GOT A WORKING DEMO
 
 05/23/2022
-1 hr in class plus half an hour outside of class reworking BirdleAlphabet get() method (which makes the keyboard) to be more efficient
+1 hr in class plus 1 hour outside of class reworking BirdleAlphabet get() method (which makes the keyboard) to be more efficient
+HOLY HECK IT WORKS WITH CHANGING THE WORD SIZE

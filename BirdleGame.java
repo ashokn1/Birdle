@@ -15,19 +15,21 @@ public class BirdleGame {
   private ArrayList<String> birds;
   private Scanner input;
   private boolean correct;
-  private static final int GUESSES = 6;
-  private static final int LETTERS = 5;
+  private static int GUESSES;
+  private static int LETTERS;
 
   //CONSTRUCTORS
   public BirdleGame() {
     correct = false;
     input = new Scanner(System.in);
     birds = new ArrayList<String>();
-    pathname = "FiveLetterBirds.txt";
+    pathname = "CommBirdsandPhrases.txt";
     readBirds(pathname);
     word = chooseBird();
     //System.out.println(word);
     System.out.println(word.length());
+    GUESSES = word.length() + 1;
+    LETTERS = word.length();
   }
 
   public void readBirds(String pathname)
@@ -54,8 +56,6 @@ public class BirdleGame {
       if (!added) {
         birds.add(line);
       }
-      //birds.add(line);
-      //System.out.println(line);	
     }
     birds.remove("0");
     birds.remove("1");
