@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.Dimension;
 
 
@@ -79,7 +77,7 @@ public class BirdleDisplay{
         disp[r][c] = a2inset;
       }
     }
-    printArr(guesses);
+    //printArr(guesses);
   }
 
   // Tester method to print to command line

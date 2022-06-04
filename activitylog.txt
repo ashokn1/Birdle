@@ -36,3 +36,9 @@ GOT A WORKING DEMO
 05/23/2022
 1 hr in class plus 1 hour outside of class reworking BirdleAlphabet get() method (which makes the keyboard) to be more efficient
 HOLY HECK IT WORKS WITH CHANGING THE WORD SIZE
+
+05/25/2022
+
+06/01/2022
+- Made a second list of passable 5 letter words; guesses can be from that list but not the chosen word, so that plurals of four letter birds can be guessed
+- started implementing radio buttons to choose between 5-letter-mode and hard mode

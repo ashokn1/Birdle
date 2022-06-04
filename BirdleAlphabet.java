@@ -26,13 +26,16 @@ public class BirdleAlphabet{
   private boolean correct;
 
   // Constructor
-	public BirdleAlphabet(){
-		this.game = new BirdleGame();
+	public BirdleAlphabet(String mode){
+    System.out.println(mode);
+		this.game = new BirdleGame(mode);
     this.display = new BirdleDisplay();
     onRow = 0;
     guess = "";
     guesses = new char[BirdleGame.getGuesses()][BirdleGame.getLetters()];
     parses = new char[BirdleGame.getGuesses()][BirdleGame.getLetters()];
+    parsedGuess = "OOOOO";
+    correct = false;
     for (int r = 0; r < guesses.length; r ++) {
       for (int c = 0; c < guesses[0].length; c ++) {
         guesses[r][c] = 0;
@@ -52,13 +55,17 @@ public class BirdleAlphabet{
 		frame.setVisible(true);	
     editDisplay();
 
-
-    while (!correct) {
-      if (d != true) {
+    do {
+      //System.out.println("A " + correct);
+      if (!d && !correct) {
+        System.out.println("B " + correct);
         editDisplay();
+        System.out.println("C " + correct);
         d = true;
+        System.out.println("D " + correct);
       }
-    }
+    } while (!correct);
+    System.out.println("QUIT\nQUIT\nQUIT\nQUIT\nQUIT");
 	}	
 
   // Returns the keyboard
@@ -80,7 +87,6 @@ public class BirdleAlphabet{
           }
           for (int i = 0; i < parses[0].length; i ++) {
             parses[onRow][i] = parsedGuess.charAt(i);
-    
           }
           onRow ++;
           guess = "";
@@ -98,7 +104,6 @@ public class BirdleAlphabet{
       public void actionPerformed(ActionEvent e){
         if (guess.length() > 0) {
           guess = guess.substring(0,guess.length()-1);
-          //System.out.print("\n" + guess);
         }
         editDisplay();
       }
@@ -117,7 +122,7 @@ public class BirdleAlphabet{
         btn.setPreferredSize(new Dimension(50, 50));
         btn.addActionListener(new ActionListener(){
     			public void actionPerformed(ActionEvent e){
-            if (guess.length() <= BirdleGame.getLetters()) {
+            if (guess.length() < BirdleGame.getLetters()) {
               //System.out.print(let);
               guess += letter;
               editDisplay();
@@ -144,6 +149,9 @@ public class BirdleAlphabet{
         guesses[onRow][c] = 0;
       }
     }
+    if (BirdleGame.isCorrect(parsedGuess)) {
+      correct = true;
+    }
     display.setDisp(guesses, parses);
     disp = display.display();
     frame.getContentPane().removeAll();
@@ -151,5 +159,6 @@ public class BirdleAlphabet{
     frame.add(disp);
     frame.add(alph);
     frame.setContentPane(all);
+    System.out.println("disp " + correct);
   }
 }

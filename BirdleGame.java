@@ -11,28 +11,36 @@ public class BirdleGame {
   //ATTRIBUTES
   private String word;
   private final String CHEAT = "divya"; // CHEAT CODE
-  private String pathname;
   private ArrayList<String> birds;
+  private ArrayList<String> guessList;
   private Scanner input;
   private boolean correct;
   private static int GUESSES;
   private static int LETTERS;
 
   //CONSTRUCTORS
-  public BirdleGame() {
+  public BirdleGame(String mode) {
     correct = false;
     input = new Scanner(System.in);
     birds = new ArrayList<String>();
-    pathname = "CommBirdsandPhrases.txt";
-    readBirds(pathname);
+    guessList = new ArrayList<String>();
+    String pathname = "FiveLetterBirds.txt";
+    String guessPathname = "FiveLetterGuesses.txt";
+    if (mode.equals("hard")) {
+      pathname = "CommBirdsandPhrases.txt";
+      guessPathname = pathname;
+    } 
+    System.out.println(pathname);
+    readBirds(pathname, birds);
+    readBirds(guessPathname, guessList);
     word = chooseBird();
-    //System.out.println(word);
+    System.out.println(word);
     System.out.println(word.length());
     GUESSES = word.length() + 1;
     LETTERS = word.length();
   }
 
-  public void readBirds(String pathname)
+  public void readBirds(String pathname, ArrayList<String> destination)
   {
     File file = new File(pathname);
     try {
@@ -41,24 +49,24 @@ public class BirdleGame {
       System.out.println("*** Cannot open " + pathname + " ***");
       System.exit(1);  // quit the program
     } 
-    birds.add("0");
-    birds.add("1");
+    destination.add("0");
+    destination.add("1");
     while(input.hasNextLine()) {
       String line = input.nextLine();
       boolean added = false;
-      for (int i = 1; i < birds.size(); i ++) {
-        if (line.length() < birds.get(i).length()) {
-          birds.add(i - 1, line);
+      for (int i = 1; i < destination.size(); i ++) {
+        if (line.length() < destination.get(i).length()) {
+          destination.add(i - 1, line);
           added = true;
           break;
         }
       }
       if (!added) {
-        birds.add(line);
+        destination.add(line);
       }
     }
-    birds.remove("0");
-    birds.remove("1");
+    destination.remove("0");
+    destination.remove("1");
   }
 
   private String chooseBird() {
@@ -110,7 +118,7 @@ public class BirdleGame {
     if (guess.equals(CHEAT)) {
       System.out.println("Cheat code activated! Word: " + word);
     }
-    if (!birds.contains(guess)) {
+    if (!guessList.contains(guess)) {
       System.out.println("not in bird list");
       valid = false;
     }
