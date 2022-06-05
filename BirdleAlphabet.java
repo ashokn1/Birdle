@@ -26,7 +26,7 @@ public class BirdleAlphabet{
   private boolean correct;
 
   // Constructor
-	public BirdleAlphabet(String mode){
+	public BirdleAlphabet(String mode, JFrame inFrame){
     System.out.println(mode);
 		this.game = new BirdleGame(mode);
     this.display = new BirdleDisplay();
@@ -45,11 +45,26 @@ public class BirdleAlphabet{
     
     display.setDisp(guesses, parses);
 
-    frame = new JFrame("Birdle");
+    //frame = new JFrame("Birdle");
+    frame = inFrame;
+    frame.getContentPane().removeAll();
+    frame.invalidate();
+    System.out.println(frame.getTitle());
+
+    
 		frame.setSize(600, 600);
     frame.setBackground(Color.white);
     
-    all = new JPanel();   
+    all = new JPanel(); 
+
+    Action key = new AbstractAction() { public void actionPerformed(ActionEvent e) { System.out.println(e.paramString()); } };    
+    for (int i = 0; i < 26; i++) {
+      all.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke((char)('A' + i)), "werd");
+      all.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke((char)('a' + i)), "werd");
+    }
+    all.getActionMap().put("werd", key);
+
+
     alph = this.get2();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -156,10 +171,11 @@ public class BirdleAlphabet{
     display.setDisp(guesses, parses);
     disp = display.display();
     frame.getContentPane().removeAll();
-    frame.invalidate();
-    frame.add(disp);
-    frame.add(alph);
+    //frame.invalidate();
+    all.add(disp);
+    all.add(alph);
     frame.setContentPane(all);
+    frame.setVisible(true);
     System.out.println("disp " + correct);
   }
 }

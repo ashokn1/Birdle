@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 class Main {
   public static void main(String[] args) {
-    new BirdleAlphabet("easy");
+    new BirdleAlphabet("easy", new JFrame("Play"));
     //buttons();
   }
 
@@ -32,19 +32,31 @@ class Main {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.add(panel);
 
+    Action key = new AbstractAction() { public void actionPerformed(ActionEvent e) { System.out.println(e.paramString()); new BirdleAlphabet("easy", frame); } };    
+    for (int i = 0; i < 26; i++) {
+      panel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+      .put(KeyStroke.getKeyStroke((char)('A' + i)), "werd");
+      panel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke((char)('a' + i)), "werd");
+    }
+    panel.getActionMap().put("werd", key);
+    fiveButton.setMnemonic('5');
+    fiveButton.addActionListener(key);
     //Register a listener for the radio buttons.
+    /*
     fiveButton.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
-        frame.dispose();
-        new BirdleAlphabet("easy");
+        //frame.dispose();
+        new BirdleAlphabet("easy", frame);
       }
     });
     allButton.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
-        frame.dispose();
-        new BirdleAlphabet("hard");
+        //frame.dispose();
+        new BirdleAlphabet("hard", frame);
       }
     });
+    */
+    
   }
 }
 
