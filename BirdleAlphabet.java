@@ -42,6 +42,7 @@ public class BirdleAlphabet{
         parses[r][c] = 'W';
       }
     }
+    
     display.setDisp(guesses, parses);
 
     frame = new JFrame("Birdle");
