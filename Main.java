@@ -4,12 +4,12 @@ import java.awt.event.*;
 
 class Main {
   public static void main(String[] args) {
-    //new BirdleAlphabet("easy");
-    buttons();
+    new BirdleAlphabet("easy");
+    //buttons();
   }
 
   public static void buttons() {
-    String result = "";
+    
     JRadioButton fiveButton = new JRadioButton("5 letter mode (EASY)");
     fiveButton.setMnemonic(KeyEvent.VK_B);
     //fiveButton.setSelected(true);
@@ -22,18 +22,6 @@ class Main {
     group.add(fiveButton);
     group.add(allButton);
 
-    //Register a listener for the radio buttons.
-    fiveButton.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent e){
-        new BirdleAlphabet("easy");
-      }
-    });
-    allButton.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent e){
-        new BirdleAlphabet("hard");
-      }
-    });
-
     JFrame frame = new JFrame("Make a choice!");
     JPanel panel = new JPanel();
 		frame.setSize(600, 600);
@@ -44,7 +32,19 @@ class Main {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.add(panel);
 
-    System.out.println(result);
+    //Register a listener for the radio buttons.
+    fiveButton.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        frame.dispose();
+        new BirdleAlphabet("easy");
+      }
+    });
+    allButton.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        frame.dispose();
+        new BirdleAlphabet("hard");
+      }
+    });
   }
 }
 
